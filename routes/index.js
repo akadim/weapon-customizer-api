@@ -98,4 +98,21 @@ router.get('/weapon-ammunition/:id', function(req, res, next) {
   });
 });
 
+/* Update Weapon Configuration */
+router.put('/weapon-configuration', function(req, res, next) {
+
+  weaponConfiguration = req.body;
+
+  const weaponType = weaponTypes.find((weaponType) => parseInt(weaponType.id) === parseInt(weaponConfiguration.type) );
+  const weaponOptic = weaponOptics.find((weaponOptic) => parseInt(weaponOptic.id) === parseInt(weaponConfiguration.optic) );
+  const weaponAmmunition = weaponAmmunitions.find((weaponAmmunition) => parseInt(weaponAmmunition.id) === parseInt(weaponConfiguration.ammunition) );
+  
+  return res.status(200).send({
+    name: weaponConfiguration.name,
+    type: weaponType,
+    optic: weaponOptic,
+    ammunition: weaponAmmunition
+ });
+});
+
 module.exports = router;
